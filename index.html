@@ -51,27 +51,82 @@
 
             <!-- Dropdown -->
             <section class="container">
-                 <div class="dropdown">
-                    <div class="input-group w-200 p-05 pb-0 ">
-                        <input type="text" class="form-control inputDropdownPrimary" placeholder="Ingrédient"
-                        id="dropdownInputPrimary" onkeyup="filterFunction()"
-                        aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default btnDropdownPrimary" type="submit">
-                                <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
-                                <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
-                            </button>
+                    <div class="row">
+                        <!-- Dropdown ingrédient -->
+                        <div class="col-md-3">
+                            <div class="input-group w-200 p-05 pb-0 ">
+                                <input type="text" class="form-control inputDropdownPrimary" placeholder="Ingrédient"
+                                id="dropdownInputPrimary" onkeyup="filterFunction('dropdownInputPrimary', 'dropdownPrimaryList')"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default btnDropdownPrimary" type="submit">
+                                        <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
+                                        <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
+                                    </button>
+                                </div>
+                            </div>
+                             <ul id="dropdownPrimaryList">
+                                <li><a href="#">HTML</a></li>
+                                <li><a href="#">CSS</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">jQuery</a></li>
+                                <li><a href="#">Bootstrap</a></li>
+                                <li><a href="#">Angular</a></li>
+                             </ul>
+                            </div>
+
+                        <!-- Dropdown appareil -->
+                        <div class="col-md-3">
+                            <div class="dropdown">
+                                <div class="input-group w-200 p-05 pb-0 ">
+                                    <input type="text" class="form-control inputDropdownGreen" placeholder="Ingrédient"
+                                    id="dropdownInputGreen" onkeyup="filterFunction('dropdownInputGreen', 'dropdownGreenList')"
+                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default btnDropdownGreen" type="submit">
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul id="dropdownGreenList">
+                                    <li><a href="#">HTML</a></li>
+                                    <li><a href="#">CSS</a></li>
+                                    <li><a href="#">JavaScript</a></li>
+                                    <li><a href="#">jQuery</a></li>
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">Angular</a></li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <!-- Dropdown appareil -->
+                        <div class="col-md-3">
+                            <div class="dropdown">
+                                <div class="input-group w-200 p-05 pb-0 ">
+                                    <input type="text" class="form-control inputDropdownOrange" placeholder="Ingrédient"
+                                    id="dropdownInputOrange" onkeyup="filterFunction('dropdownInputOrange', 'dropdownOrangeList')"
+                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default btnDropdownOrange" type="submit">
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <ul id="dropdownOrangeList">
+                                    <li><a href="#">HTML</a></li>
+                                    <li><a href="#">CSS</a></li>
+                                    <li><a href="#">JavaScript</a></li>
+                                    <li><a href="#">jQuery</a></li>
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">Angular</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
                     </div>
-                     <ul id="dropdownPrimaryList">
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">jQuery</a></li>
-                        <li><a href="#">Bootstrap</a></li>
-                        <li><a href="#">Angular</a></li>
-                     </ul>
-                    </div>   
             </section>
 
 

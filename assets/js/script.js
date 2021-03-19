@@ -1,13 +1,13 @@
-const filterFunction = () => {
+const filterFunction = (elemInput, listElem) => {
     let input, filter, ul, li, a, i, txtValue;
     let foundValue = [];
 
-    input = document.getElementById("dropdownInputPrimary");
+    input = document.getElementById(elemInput);
     filter = input.value.toUpperCase();
 
     if(input.value.length >= 3){
-        $("#dropdownPrimaryList").css("display", "inherit");
-        ul = document.getElementById("dropdownPrimaryList");
+        $(listElem).css("display", "inherit");
+        ul = document.getElementById(listElem);
         li = ul.getElementsByTagName("li");
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("a")[0];
@@ -30,7 +30,7 @@ const filterFunction = () => {
             }
         }
     } else {
-        $("#dropdownPrimaryList").css("display", "none");
+        $(listElem).css("display", "none");
         $("#icon-dropdown-down").css("display", "inherit");
         $("#icon-dropdown-up").css("display", "none");
     }

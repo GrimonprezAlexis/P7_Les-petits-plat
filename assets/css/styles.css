@@ -39,8 +39,8 @@ header {
     color: #D04F4F;
 }
 
-.padding05 {
-    padding: .5rem;
+.p-05 {
+    padding: .5rem 0;
 }
 /** Search bar */
 .inputGroupBorder {
@@ -67,3 +67,85 @@ header {
     border-radius: 0 5px 5px 0;
     padding: .75rem;
 }
+
+.btnDefault {
+    background: #3282F7;
+    border-radius: 5px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 17px;
+    color: #FFFFFF;
+    padding: 0.5rem 1rem;
+}
+
+.icon {
+    width: 16px;
+    height: auto;
+}
+.removeIcon {
+    margin-top: -2px;
+    margin-left: 0.25rem;
+}
+
+
+/*--------------------------------------------------------------
+#  DROPDOWN SEARCH
+--------------------------------------------------------------*/
+#icon-dropdown-up {
+    display: none;
+}
+.w-200{
+    width: 200px;
+}
+.pb-0 {
+    padding-bottom: 0;
+}
+.inputDropdownPrimary {
+    background: #3282F7;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    padding: 1rem;
+}
+.inputDropdownPrimary:focus {
+    box-shadow: none;
+    background: #3282F7;
+}
+.inputDropdownPrimary::placeholder {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+    color: #FFFFFF;
+}
+.btnDropdownPrimary {
+    background: #3282F7;
+    border-radius: 0 5px 5px 0;
+    padding: 1rem;
+}
+
+#dropdownPrimaryList {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#dropdownPrimaryList li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#dropdownPrimaryList li a:hover:not(.header) {
+  background-color: #eee;
+}
+/** END DROPDOWN SEARCH */

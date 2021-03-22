@@ -54,9 +54,12 @@ header {
 .p-05 {
     padding: .5rem 0;
 }
+
+
+
 /** Search bar */
 .inputGroupBorder {
-    background: #E7E7E7;
+    background: $grey;
     border: none;
     border-radius: 5px 0 0 5px;
     padding: .75rem;
@@ -68,22 +71,22 @@ header {
     font-size: 18px;
     text-align: center;
     line-height: 22px;
-    color: #000000;
+    color: $black;
     opacity: 0.25;
     text-align: left;
 }
 
 /** Glyphicon search bar */
 .buttonGroupBorder {
-    background: #E7E7E7;
+    background: $grey;
     border-radius: 0 5px 5px 0;
     padding: .75rem;
 }
 
 .btnDefault {
-    background: #3282F7;
+    background: $blue;
     border-radius: 5px;
-    font-family: Lato;
+    font-family: $lato-font;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
@@ -114,46 +117,32 @@ header {
 .pb-0 {
     padding-bottom: 0;
 }
+
+
 .inputDropdownPrimary, .inputDropdownGreen, .inputDropdownOrange {
-    background: #3282F7;
-    border: none;
-    border-radius: 5px 0 0 5px;
-    padding: 1rem;
+    @extend %inputDropDown;
+    background: $blue;
 }
 .inputDropdownGreen {
-    background: #68D9A4;
+    background: $green;
 }
 .inputDropdownOrange {
-    background: #ED6454;
+    background: $orange;
 }
 
 .inputDropdownPrimary:focus {
-    box-shadow: none;
-    background: #3282F7;
+    background: $blue;
 }
 .inputDropdownGreen:focus {
-    box-shadow: none;
-    background: #68D9A4;
+    background: $green;
 }
 .inputDropdownOrange:focus {
-    box-shadow: none;
-    background: #68D9A4;
+    background: $orange;
 }
 
-
-.inputDropdownPrimary::placeholder, .inputDropdownGreen::placeholder, .inputDropdownOrange::placeholder{
-    font-family: Lato;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: left;
-    color: #FFFFFF;
-}
 .btnDropdownPrimary, .btnDropdownGreen, .btnDropdownOrange {
-    background: #3282F7;
-    border-radius: 0 5px 5px 0;
-    padding: 1rem;
+    @extend %btnDropdown;
+    background: $blue;
 }
 .btnDropdownGreen {
     background: #68D9A4;
@@ -162,26 +151,34 @@ header {
     background: #ED6454;
 }
 
-#dropdownPrimaryList, #dropdownGreenList, #dropdownOrangeList {
+.dropDownList {
     display: none;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    width: 200px;
+
+    li a {
+        font-family: $lato-font;
+        color: $white;
+        margin-top: 3px;
+        border-radius: 5px;
+        margin-top: -7px;
+        padding: 16px;
+        text-decoration: none;
+        display: block;
+        border: none;
+    }
 }
 
-#dropdownPrimaryList li a, #dropdownGreenList li a, #dropdownOrangeList li a{
-  border: 1px solid #ddd;
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: block
+#dropdownPrimaryList {
+    background-color: $blue;
 }
-
-#dropdownPrimaryList li a:hover:not(.header), #dropdownGreenList li a:hover:not(.header), #dropdownOrangeList li a:hover:not(.header) {
-  background-color: #eee;
+#dropdownGreenList {
+    background-color: $green;
+}
+#dropdownOrangeList {
+    background-color: $orange;
 }
 
 

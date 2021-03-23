@@ -52,31 +52,33 @@
             <section class="container">
                     <div class="row">
                         <!-- Dropdown ingrédient -->
-                        <div class="col-md-3">
-                            <div class="input-group w-200 p-05 pb-0 ">
-                                <input type="text" class="form-control inputDropdownPrimary" placeholder="Ingrédient"
-                                id="dropdownInputPrimary" onkeyup="filterFunction('dropdownInputPrimary', 'dropdownPrimaryList')"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default btnDropdownPrimary" type="submit">
-                                        <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
-                                        <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
-                                    </button>
+                        <div class="col-md-3 contents">
+                            <div class="dropdown dropdownSearch">
+                                <div class="input-group w-200 p-05 pb-0 ">
+                                    <input type="text" class="form-control inputDropdownPrimary" placeholder="Ingrédient"
+                                    id="dropdownInputPrimary" onkeyup="filterFunction('dropdownInputPrimary', 'dropdownPrimaryList')"
+                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default btnDropdownPrimary" type="submit">
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" id="icon-dropdown-down"  />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" id="icon-dropdown-up" />
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                             <ul class="dropDownList" id="dropdownPrimaryList">
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">CSS</a></li>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">jQuery</a></li>
-                                <li><a href="#">Bootstrap</a></li>
-                                <li><a href="#">Angular</a></li>
-                             </ul>
+                                <ul class="dropDownList" id="dropdownPrimaryList">
+                                    <li><a href="#">HTML</a></li>
+                                    <li><a href="#">CSS</a></li>
+                                    <li><a href="#">JavaScript</a></li>
+                                    <li><a href="#">jQuery</a></li>
+                                    <li><a href="#">Bootstrap</a></li>
+                                    <li><a href="#">Angular</a></li>
+                                </ul>
+                             </div>
                         </div>
 
                         <!-- Dropdown appareil -->
-                        <div class="col-md-3">
-                            <div class="dropdown">
+                        <div class="col-md-3 contents">
+                            <div class="dropdown dropdownSearch">
                                 <div class="input-group w-200 p-05 pb-0 ">
                                     <input type="text" class="form-control inputDropdownGreen" placeholder="Appareil"
                                     class="dropDownList" id="dropdownInputGreen" onkeyup="filterFunction('dropdownInputGreen', 'dropdownGreenList')"
@@ -100,8 +102,8 @@
                         </div>
 
                         <!-- Dropdown appareil -->
-                        <div class="col-md-3">
-                            <div class="dropdown">
+                        <div class="col-md-3 contents">
+                            <div class="dropdown dropdownSearch">
                                 <div class="input-group w-200 p-05 pb-0 ">
                                     <input type="text" class="form-control inputDropdownOrange" placeholder="Ingrédient"
                                     id="dropdownInputOrange" onkeyup="filterFunction('dropdownInputOrange', 'dropdownOrangeList')"

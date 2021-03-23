@@ -8251,7 +8251,7 @@ h3 {
   color: #FFFFFF;
 }
 .inputDropdownPrimary::placeholder, .inputDropdownGreen::placeholder, .inputDropdownOrange::placeholder {
-  font-family: Lato;
+  font-family: "Lato";
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -8370,16 +8370,18 @@ header {
 /*--------------------------------------------------------------
 #  DROPDOWN SEARCH
 --------------------------------------------------------------*/
+.contents {
+  display: contents;
+}
+
+.dropdownSearch {
+  width: 200px;
+  padding-bottom: 0;
+  margin-left: 1rem;
+}
+
 #icon-dropdown-up {
   display: none;
-}
-
-.w-200 {
-  width: 200px;
-}
-
-.pb-0 {
-  padding-bottom: 0;
 }
 
 .inputDropdownPrimary, .inputDropdownGreen, .inputDropdownOrange {
@@ -8424,6 +8426,9 @@ header {
   padding: 0;
   margin: 0;
   width: 200px;
+  margin-top: -3px;
+  position: absolute;
+  z-index: 20;
 }
 .dropDownList li a {
   font-family: "Lato";

@@ -8265,6 +8265,15 @@ h3 {
   padding: 1rem;
 }
 
+.card-ingredients, .card-description, .card-time, .card-title {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8316,6 +8325,10 @@ header {
 
 .p-05 {
   padding: 0.5rem 0;
+}
+
+.no-border {
+  border: none;
 }
 
 /** Search bar */
@@ -8455,5 +8468,34 @@ header {
 }
 
 /** END DROPDOWN SEARCH */
+.card-body-style {
+  background: #E7E7E7;
+  border-radius: 0 0 5px 5px;
+}
+
+.card-time {
+  font-weight: bold;
+}
+
+.clockIcon {
+  margin-top: -2px;
+  margin-left: 0.25rem;
+}
+
+.card-description {
+  font-family: "Roboto";
+  font-size: 12px;
+  line-height: 100%;
+}
+
+.card-ingredients {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+}
+.card-ingredients span {
+  font-weight: normal;
+}
 
 /*# sourceMappingURL=style.css.map */

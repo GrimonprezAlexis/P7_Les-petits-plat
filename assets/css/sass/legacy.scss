@@ -27,3 +27,12 @@
     border-radius: 0 5px 5px 0;
     padding: 1rem;
 }
+
+%card-font {
+    font-family: $lato-font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: $black;
+}

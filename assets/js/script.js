@@ -1,3 +1,51 @@
+    //Fetch data from json file
+    fetch('/data/recipes.json')
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        appendRecipes(data);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+    let arrayOfRecipes = [];
+
+    //Loop the list of recipes
+    appendRecipes = function appendRecipes(recipes) {
+        let recipesList = $("#recipes");
+        recipes.forEach(r => {
+
+            recipesList.append(`
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow no-border">
+                        <img class="card-img-top" src="/assets/img/bg-recipe.png" alt="Card image cap" />
+                        <div class="card-body card-body-style">
+                            <div class="d-flex justify-content-between">
+                                <label class="card-title">${r.name}</label>
+                                <div class="card-time"><img src="./assets/img/clock-icon.png" class="icon clockIcon" /> <span>${r.time} min</span></div>
+                            </div>
+                            <div class="row d-flex justify-content-between">
+                                <ul class="col-md-6 card-ingredients" id="id-card-ingredients-${r.id}"></ul>
+                                <small class="col-md-6 card-description">${r.description}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+
+            r.ingredients.forEach(i => {
+                let cardIngredients = $(`#id-card-ingredients-${r.id}`);
+                cardIngredients.append(`
+                    <li>${i.ingredient}: <span>${i.quantity ? i.quantity : ''} ${i.unit ? i.unit : ''}</span></li>
+                `);
+            });
+
+        });
+    }
+
 
 // Show / Hide dropdown list
 const toggleDropdown = (showList, listElem) => {

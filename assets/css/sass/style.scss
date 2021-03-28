@@ -58,6 +58,10 @@ header {
     border: none;
 }
 
+.wrap {
+    flex-wrap: wrap;
+}
+
 
 /** Search bar */
 .inputGroupBorder {
@@ -223,6 +227,10 @@ header {
     font-size: 12px;
     line-height: 14px;
     margin: 0;
+
+    li {
+        margin-top: 3px;
+    }
 
     span {
         font-weight: normal;

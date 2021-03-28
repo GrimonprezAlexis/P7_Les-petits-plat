@@ -57,47 +57,33 @@
                                 <div class="input-group w-200 p-05 pb-0 ">
                                     <input type="text" class="form-control inputDropdownPrimary" placeholder="Ingrédient"
                                     id="dropdownInputPrimary" onkeyup="filterFunction('dropdownInputPrimary', 'dropdownPrimaryList')"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-btn">
+                                    aria-label="Ingrédient listes" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn" onclick="toggleDropdownList('dropdownPrimaryList')">
                                         <button class="btn btn-default btnDropdownPrimary" type="submit">
                                             <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
                                             <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
                                         </button>
                                     </div>
                                 </div>
-                                <ul class="dropDownList" id="dropdownPrimaryList">
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">JavaScript</a></li>
-                                    <li><a href="#">jQuery</a></li>
-                                    <li><a href="#">Bootstrap</a></li>
-                                    <li><a href="#">Angular</a></li>
-                                </ul>
+                                <ul class="dropDownList" id="dropdownPrimaryList"></ul>
                              </div>
                         </div>
 
                         <!-- Dropdown appareil -->
                         <div class="col-md-3 contents">
                             <div class="dropdown dropdownSearch">
-                                <div class="input-group w-200 p-05 pb-0 ">
+                                <div class="input-group w-200 p-05 pb-0">
                                     <input type="text" class="form-control inputDropdownGreen" placeholder="Appareil"
                                     class="dropDownList" id="dropdownInputGreen" onkeyup="filterFunction('dropdownInputGreen', 'dropdownGreenList')"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-btn">
+                                    aria-label="Appareil listes" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn" onclick="toggleDropdownList('dropdownGreenList')">
                                         <button class="btn btn-default btnDropdownGreen" type="submit">
                                             <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
                                             <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
                                         </button>
                                     </div>
                                 </div>
-                                <ul class="dropDownList" id="dropdownGreenList">
-                                    <li><a href="#">HTML</a></li>
-                                    <li><a href="#">CSS</a></li>
-                                    <li><a href="#">JavaScript</a></li>
-                                    <li><a href="#">jQuery</a></li>
-                                    <li><a href="#">Bootstrap</a></li>
-                                    <li><a href="#">Angular</a></li>
-                                </ul>
+                                <ul class="dropDownList" id="dropdownGreenList"></ul>
                             </div>
                         </div>
 
@@ -105,40 +91,17 @@
                         <div class="col-md-3 contents">
                             <div class="dropdown dropdownSearch">
                                 <div class="input-group w-200 p-05 pb-0 ">
-                                    <input type="text" class="form-control inputDropdownOrange" placeholder="Ingrédient"
+                                    <input type="text" class="form-control inputDropdownOrange" placeholder="Ustensiles"
                                     id="dropdownInputOrange" onkeyup="filterFunction('dropdownInputOrange', 'dropdownOrangeList')"
-                                    aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-btn">
+                                    aria-label="Ustensiles listes" aria-describedby="basic-addon2">
+                                    <div class="input-group-btn" onclick="toggleDropdownList('dropdownOrangeList')">
                                         <button class="btn btn-default btnDropdownOrange" type="submit">
                                             <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
                                             <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
                                         </button>
                                     </div>
                                 </div>
-                                <ul class="dropDownList" id="dropdownOrangeList">
-                                    <li><a href="#">Lait de coco</a></li>
-                                    <li><a href="#">Sucre</a></li>
-                                    <li><a href="#">Concombre</a></li>
-                                    <li><a href="#">Citron Vert</a></li>
-                                    <li><a href="#">Oignon</a></li>
-                                    <li><a href="#">Riz blanc</a></li>
-                                    <li><a href="#">Maïs</a></li>
-                                    <li><a href="#">Crème fraiche</a></li>
-                                    <li><a href="#">Pomme</a></li>
-                                    <li><a href="#">Chocolat au lait</a></li>
-
-
-                                    <li><a href="#">Jus de citron</a></li>
-                                    <li><a href="#">Glaçons</a></li>
-                                    <li><a href="#">Tomate</a></li>
-                                    <li><a href="#">Poulet</a></li>
-                                    <li><a href="#">Poivron rouge</a></li>
-                                    <li><a href="#">Thon en miettes</a></li>
-                                    <li><a href="#">Vinaigrette</a></li>
-                                    <li><a href="#">Gruyère râpé</a></li>
-                                    <li><a href="#">Oeuf</a></li>
-                                    <li><a href="#">Crème liquide</a></li>
-                                </ul>
+                                <ul class="dropDownList" id="dropdownOrangeList"></ul>
                             </div>
                         </div>
 

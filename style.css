@@ -8331,6 +8331,10 @@ header {
   border: none;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 /** Search bar */
 .inputGroupBorder {
   background: #E7E7E7;
@@ -8493,6 +8497,9 @@ header {
   font-size: 12px;
   line-height: 14px;
   margin: 0;
+}
+.card-ingredients li {
+  margin-top: 3px;
 }
 .card-ingredients span {
   font-weight: normal;

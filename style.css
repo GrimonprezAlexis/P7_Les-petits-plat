@@ -8335,6 +8335,14 @@ header {
   flex-wrap: wrap;
 }
 
+.flex {
+  display: flex;
+}
+
+.none {
+  display: none;
+}
+
 /** Search bar */
 .inputGroupBorder {
   background: #E7E7E7;
@@ -8392,7 +8400,6 @@ header {
 }
 
 .dropdownSearch {
-  width: 200px;
   padding-bottom: 0;
   margin-left: 1rem;
 }
@@ -8439,21 +8446,22 @@ header {
 
 .dropDownList {
   display: none;
+  columns: 4;
   list-style-type: none;
   padding: 0;
   margin: 0;
-  width: 200px;
   margin-top: -3px;
   position: absolute;
   z-index: 20;
+  width: max-content;
 }
 .dropDownList li a {
   font-family: "Lato";
   color: #FFFFFF;
   margin-top: 3px;
   border-radius: 5px;
-  margin-top: -7px;
-  padding: 16px;
+  margin-top: 0px;
+  padding: 10px;
   text-decoration: none;
   display: block;
   border: none;

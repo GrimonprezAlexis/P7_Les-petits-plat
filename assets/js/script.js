@@ -23,7 +23,7 @@ const appendAndMapRecipes = (recipes) => {
     let ustensilsList = $('#dropdownUstensilList');
 
     
-    recipes.forEach(r => {
+    recipes.forEach((r , index) => {
 
         //Init appareil list
         if(arrayOfAppliance.indexOf(r.appliance) === -1){
@@ -37,7 +37,7 @@ const appendAndMapRecipes = (recipes) => {
 
         //Add recipes list
         recipesList.append(`
-            <div class="col-md-4">
+            <div class="col-md-4 recipe">
                 <div class="card mb-4 box-shadow no-border">
                     <img class="card-img-top" src="/assets/img/bg-recipe.png" alt="Card image cap" />
                     <div class="card-body card-body-style">
@@ -89,13 +89,8 @@ const appendAndMapRecipes = (recipes) => {
     });
 }
 
-console.log('> arrayOfIngredients', arrayOfIngredients);
-console.log('> arrayOfAppliance', arrayOfAppliance);
-console.log('> arrayOfUstensils', arrayOfUstensils);
-
-
 const toggleDropdownList = (dropdownList) => {
-    $(`#${dropdownList}`).toggle();
+    $(`#${dropdownList}`).toggle(); 
 }
 
 
@@ -121,7 +116,7 @@ const filterFunction = (inputElem, dropdownList) => {
     filter = input.value.toUpperCase();
 
     if(input.value.length >= 3){
-        $(`#${dropdownList}`).css("display", "inherit");
+        $(`#${dropdownList}`).css("display", "flex");
         ul = document.getElementById(dropdownList);
         li = ul.getElementsByTagName("li");
         for (i = 0; i < li.length; i++) {
@@ -143,10 +138,24 @@ const filterFunction = (inputElem, dropdownList) => {
             }
         }
     } else {
+        //Reset all dropdownList
+        ul = document.getElementById(dropdownList);
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            li[i].style.display = 'inherit';
+        }
+
         $(`#${dropdownList}`).css("display", "none");
         toggleIconDropdown(false);
     }
+}
 
+const filterAll = () => {
+    let searchValue = $('#searchAll').val();
+    if(searchValue.length >= 3){
+        $('.recipe').hide();
+        $('.recipe:contains("'+searchValue+'")').show();
+    }
 }
 
 

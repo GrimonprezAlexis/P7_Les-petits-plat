@@ -68,21 +68,21 @@ const appendAndMapRecipes = (recipes) => {
 
 
     //Add list of ingrédient
-    arrayOfIngredients.forEach(ingredient => {
+    arrayOfIngredients.forEach((ingredient, index) => {
         ingredientsList.append(`
-            <li><a href="#">${ingredient}</a></li>
+            <li><a href="#" id="ingredient-${index}">${ingredient}</a></li>
         `)
     });
     //Add list of appliance (appareil)
-    arrayOfAppliance.forEach(appliance => {
+    arrayOfAppliance.forEach((appliance, index) => {
         appliancesList.append(`
-            <li><a href="#">${appliance}</a></li>
+            <li><a href="#" id="appliance-${index}">${appliance}</a></li>
         `)
     });
     //Add list of ustanciles
-    arrayOfUstensils.forEach(ustensil => {
+    arrayOfUstensils.forEach((ustensil, index) => {
         ustensilsList.append(`
-            <li><a href="#">${ustensil}</a></li>
+            <li><a href="#" id="ustensil-${index}">${ustensil}</a></li>
         `)
     });
 }
@@ -164,3 +164,46 @@ const filterAll = () => {
         $('.recipe').show();
     }
 }
+
+
+//Add tag
+let arrayOfTag = [];
+$(".dropDownList").on("click", "li", function(event){
+    let tagList = $("#tags");
+    let colorBtn;
+
+    if(arrayOfTag.indexOf(event.target.text) === -1){
+        arrayOfTag.push(toKebabCase(event.target.text));
+
+        if(event.delegateTarget.id == 'dropdownIngredientList') colorBtn = 'btnBlue';
+        if(event.delegateTarget.id == 'dropdownAppareilList') colorBtn = 'btnGreen';
+        if(event.delegateTarget.id == 'dropdownUstensilList') colorBtn = 'btnOrange';
+
+        tagList.append(`
+            <button type="button" class="btn btn-info btnDefault ${colorBtn} ${event.target.id}" 
+                onclick="deleteTag('${toKebabCase(event.target.text)}', '${event.target.id}')">
+                ${event.target.text} 
+                <img src="./assets/img/remove-icon.png" class="icon removeIcon" alt="Remove icon"/>
+            </button>
+        `);
+    }
+});
+
+//Remove tag
+const deleteTag = (el, elemId) => {
+    console.log(el);
+    for( var i = 0; i < arrayOfTag.length; i++){ 
+        if ( arrayOfTag[i] === el) { 
+            $(`.${elemId}`).remove();
+            arrayOfTag.splice(i, 1);
+        }
+    }
+}
+
+//Transform to Kebab case (some-text)
+const toKebabCase = str =>
+  str &&
+  str
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    .map(x => x.toLowerCase())
+    .join('-');

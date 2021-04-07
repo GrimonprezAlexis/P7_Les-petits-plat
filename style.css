@@ -8343,6 +8343,21 @@ header {
   display: none;
 }
 
+.btnGreen {
+  background-color: #68D9A4 !important;
+  border-color: #68D9A4 !important;
+}
+
+.btnBlue {
+  background-color: #3282F7 !important;
+  border-color: #3282F7 !important;
+}
+
+.btnOrange {
+  background-color: #ED6454 !important;
+  border-color: #ED6454 !important;
+}
+
 /** Search bar */
 .inputGroupBorder {
   background: #E7E7E7;

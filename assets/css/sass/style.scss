@@ -70,6 +70,20 @@ header {
     display: none;
 }
 
+.btnGreen {
+    background-color: $green!important;
+    border-color: $green!important;
+}
+
+.btnBlue {
+    background-color: $blue!important;
+    border-color: $blue!important;
+}
+
+.btnOrange {
+    background-color: $orange!important;
+    border-color: $orange!important;
+}
 
 /** Search bar */
 .inputGroupBorder {

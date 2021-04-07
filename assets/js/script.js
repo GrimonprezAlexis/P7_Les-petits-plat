@@ -157,5 +157,10 @@ const filterAll = () => {
     if(searchValue.length >= 3){
         $('.recipe').hide();
         $('.recipe:contains("'+searchValue+'")').show();
+        if(!$('.recipe').is(":visible")){
+            $('#recipes-not-found').css('display', 'block');
+        }
+    } else {
+        $('.recipe').show();
     }
 }

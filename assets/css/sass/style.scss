@@ -244,3 +244,12 @@ header {
         font-weight: normal;
     }
 }
+
+#recipes-not-found {
+    display: none;
+    background: #E7E7E7;
+    padding: 2rem;
+    margin: 0;
+    font-family: $lato-font;
+    font-size: 1rem;
+}

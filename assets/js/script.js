@@ -21,16 +21,14 @@ const appendAndMapRecipes = (recipes) => {
     let ingredientsList = $('#dropdownIngredientList');
     let appliancesList = $('#dropdownAppareilList');
     let ustensilsList = $('#dropdownUstensilList');
-
-    
     recipes.forEach((r , index) => {
 
-        //Init appareil list
+        //Init appareil list, push only if not present in arrayOfAppliance
         if(arrayOfAppliance.indexOf(r.appliance) === -1){
             arrayOfAppliance.push(r.appliance);
         }
 
-        //Init ustanciles lists
+        //Init ustanciles lists, push only if not includes in arrayOfUstensils
         r.ustensils.map((ustensil) => { 
             if(!arrayOfUstensils.includes(ustensil)) arrayOfUstensils.push(ustensil); 
         });
@@ -54,7 +52,7 @@ const appendAndMapRecipes = (recipes) => {
             </div>
         `);
 
-        //Init list of ingredients
+        //Init list of ingredients, push only if not present in arrayOfIngredients
         r.ingredients.forEach(i => {
             if(arrayOfIngredients.indexOf(i.ingredient) === -1){
                 arrayOfIngredients.push(i.ingredient);
@@ -91,13 +89,17 @@ const appendAndMapRecipes = (recipes) => {
 
 const toggleDropdownList = (dropdownList) => {
     $(`#${dropdownList}`).toggle(); 
+    if($(`#${dropdownList}`)[0].style.display == 'block') toggleIconDropdown(true);
+    else toggleIconDropdown(false);
 }
 
 
 // Toggle icon of input
 const toggleIconDropdown = (showList) => {
+    let boolShowList = showList;
+
     // Icon is up if value is found
-    if(showList){
+    if(boolShowList){
         $("#icon-dropdown-down").css("display", "none");
         $("#icon-dropdown-up").css("display", "inherit");        
     } else {
@@ -157,40 +159,3 @@ const filterAll = () => {
         $('.recipe:contains("'+searchValue+'")').show();
     }
 }
-
-
-
-//Filter words grab by user rather than list of words
-//dropdownInputPrimary, dropdownPrimaryList
-/* const filterFunction = (elemInput, listElem) => {
-    let input, filter, ul, li, a, i, txtValue;
-    let foundValue = [];
-
-    input = document.getElementById(elemInput);
-    filter = input.value.toUpperCase();
-
-    if(input.value.length >= 3){
-        //By default the list is hide
-        $(`#${listElem}`).css("display", "inherit");
-        ul = document.getElementById(listElem);
-        li = ul.getElementsByTagName("li");
-
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                foundValue.push(true);
-                li[i].style.display = "";
-            } else {
-                foundValue.push(false);
-                li[i].style.display = "none";
-            }
-            //When is finish
-            if(i == li.length -1){
-                toggleDropdown(foundValue.includes(true), listElem);
-            }
-        }
-    } else {
-        toggleDropdown(false, listElem);
-    }
-} */

@@ -152,8 +152,9 @@ const filterFunction = (inputElem, dropdownList) => {
     }
 }
 
-const filterAll = () => {
-    let searchValue = $('#searchAll').val();
+//Show list by text field
+const filterAllByText = () => {
+    let searchValue = $('#inputSearchAll').val();
     if(searchValue.length >= 3){
         $('.recipe').hide();
         $('.recipe:contains("'+searchValue+'")').show();
@@ -171,14 +172,13 @@ let arrayOfTag = [];
 $(".dropDownList").on("click", "li", function(event){
     let tagList = $("#tags");
     let colorBtn;
+    let delegateTarget = event.delegateTarget.id;
 
     if(arrayOfTag.indexOf(event.target.text) === -1){
         arrayOfTag.push(toKebabCase(event.target.text));
-
-        if(event.delegateTarget.id == 'dropdownIngredientList') colorBtn = 'btnBlue';
-        if(event.delegateTarget.id == 'dropdownAppareilList') colorBtn = 'btnGreen';
-        if(event.delegateTarget.id == 'dropdownUstensilList') colorBtn = 'btnOrange';
-
+        if(delegateTarget == 'dropdownIngredientList') colorBtn = 'btnBlue';
+        if(delegateTarget == 'dropdownAppareilList') colorBtn = 'btnGreen';
+        if(delegateTarget == 'dropdownUstensilList') colorBtn = 'btnOrange';
         tagList.append(`
             <button type="button" class="btn btn-info btnDefault ${colorBtn} ${event.target.id}" 
                 onclick="deleteTag('${toKebabCase(event.target.text)}', '${event.target.id}')">
@@ -187,6 +187,10 @@ $(".dropDownList").on("click", "li", function(event){
             </button>
         `);
     }
+
+    //Filter list of recipes by tag
+
+
 });
 
 //Remove tag

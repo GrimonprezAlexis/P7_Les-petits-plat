@@ -8239,18 +8239,18 @@ h3 {
     border: 1px solid #ddd !important;
   }
 }
-.inputDropdownPrimary, .inputDropdownGreen, .inputDropdownOrange {
+.inputDropdownIngredient, .inputDropdownAppareil, .inputDropdownUstensil {
   border: none;
   border-radius: 5px 0 0 5px;
   padding: 1rem;
   color: #FFFFFF;
   font-family: "Lato";
 }
-.inputDropdownPrimary:focus, .inputDropdownGreen:focus, .inputDropdownOrange:focus {
+.inputDropdownIngredient:focus, .inputDropdownAppareil:focus, .inputDropdownUstensil:focus {
   box-shadow: none;
   color: #FFFFFF;
 }
-.inputDropdownPrimary::placeholder, .inputDropdownGreen::placeholder, .inputDropdownOrange::placeholder {
+.inputDropdownIngredient::placeholder, .inputDropdownAppareil::placeholder, .inputDropdownUstensil::placeholder {
   font-family: "Lato";
   font-style: normal;
   font-weight: bold;
@@ -8260,7 +8260,7 @@ h3 {
   color: #FFFFFF;
 }
 
-.btnDropdownPrimary, .btnDropdownGreen, .btnDropdownOrange {
+.btnDropdownIngredient, .btnDropdownAppareil, .btnDropdownUstensil {
   border-radius: 0 5px 5px 0;
   padding: 1rem;
 }
@@ -8401,39 +8401,39 @@ header {
   display: none;
 }
 
-.inputDropdownPrimary, .inputDropdownGreen, .inputDropdownOrange {
+.inputDropdownIngredient, .inputDropdownAppareil, .inputDropdownUstensil {
   background: #3282F7;
 }
 
-.inputDropdownGreen {
+.inputDropdownAppareil {
   background: #68D9A4;
 }
 
-.inputDropdownOrange {
+.inputDropdownUstensil {
   background: #ED6454;
 }
 
-.inputDropdownPrimary:focus {
+.inputDropdownIngredient:focus {
   background: #3282F7;
 }
 
-.inputDropdownGreen:focus {
+.inputDropdownAppareil:focus {
   background: #68D9A4;
 }
 
-.inputDropdownOrange:focus {
+.inputDropdownUstensil:focus {
   background: #ED6454;
 }
 
-.btnDropdownPrimary, .btnDropdownGreen, .btnDropdownOrange {
+.btnDropdownIngredient, .btnDropdownAppareil, .btnDropdownUstensil {
   background: #3282F7;
 }
 
-.btnDropdownGreen {
+.btnDropdownAppareil {
   background: #68D9A4;
 }
 
-.btnDropdownOrange {
+.btnDropdownUstensil {
   background: #ED6454;
 }
 
@@ -8459,15 +8459,15 @@ header {
   border: none;
 }
 
-#dropdownPrimaryList {
+#dropdownIngredientList {
   background-color: #3282F7;
 }
 
-#dropdownGreenList {
+#dropdownAppareilList {
   background-color: #68D9A4;
 }
 
-#dropdownOrangeList {
+#dropdownUstensilList {
   background-color: #ED6454;
 }
 

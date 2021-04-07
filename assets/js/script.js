@@ -18,9 +18,9 @@ let arrayOfUstensils = [];
 //Loop the list of recipes
 const appendAndMapRecipes = (recipes) => {
     let recipesList = $("#recipes");
-    let ingredientsList = $('#dropdownGreenList');
-    let appliancesList = $('#dropdownGreenList');
-    let ustensilsList = $('#dropdownOrangeList');
+    let ingredientsList = $('#dropdownIngredientList');
+    let appliancesList = $('#dropdownAppareilList');
+    let ustensilsList = $('#dropdownUstensilList');
 
     
     recipes.forEach(r => {
@@ -88,6 +88,11 @@ const appendAndMapRecipes = (recipes) => {
         `)
     });
 }
+
+console.log('> arrayOfIngredients', arrayOfIngredients);
+console.log('> arrayOfAppliance', arrayOfAppliance);
+console.log('> arrayOfUstensils', arrayOfUstensils);
+
 
 const toggleDropdownList = (dropdownList) => {
     $(`#${dropdownList}`).toggle();

@@ -200,15 +200,27 @@ $(".dropDownList").on("click", "li", function(event){
         `);
     }
 
-    //Filter list of recipes by tag
-    let arrayOfRecipesFiltered = arrayOfRecipes.filter(currentElement => {
+    //Filter list of recipes by appliance
+    let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return arrayOfTagValue.includes(currentElement.appliance || currentElement.name);
     });
 
-    arrayOfRecipesFiltered = arrayOfRecipes.filter(currentElement => {
-        
-    })
+    //Filter list of recipes by ingredients
+    let recipesByIngredients = arrayOfRecipes.filter((r) => {
+        return r.ingredients.map((i) => {
+            if(arrayOfTagValue.indexOf(i.ingredient) > -1){
+                return r.id;
+            }
+        });
+    });
 
+    //Filter list of recipes by ustensils
+    let recipesByUstensils = arrayOfRecipes.filter((r) => {
+        return r.ustensils.includes(arrayOfTagValue);
+    });
+
+    let arrayOfRecipesFiltered = [];
+    arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils);
     filterRecipesByTag(arrayOfRecipesFiltered);
 
 /*     let data = recipes.map((r) => {

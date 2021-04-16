@@ -4,38 +4,76 @@ fetch('/data/recipes.json')
     return response.json();
 })
 .then(data => {
-    console.log(data);
-    appendAndMapRecipes(data);
+    setArrayOfRecipes(data);
+    setArray(data);
+    appendRecipesHTML(data);
+    setLengthOfRecipes(data);
 })
 .catch(err => {
     console.log(err);
 });
 
+
+let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
 
-//Loop the list of recipes
-const appendAndMapRecipes = (recipes) => {
-    let recipesList = $("#recipes");
-    let ingredientsList = $('#dropdownIngredientList');
-    let appliancesList = $('#dropdownAppareilList');
-    let ustensilsList = $('#dropdownUstensilList');
-    recipes.forEach((r , index) => {
+const setArrayOfRecipes = (recipes) => {
+    arrayOfRecipes = recipes;
+}
 
+const setArray = (recipes) => {
+    recipes.forEach((r , index) => {
         //Init appareil list, push only if not present in arrayOfAppliance
         if(arrayOfAppliance.indexOf(r.appliance) === -1){
             arrayOfAppliance.push(r.appliance);
         }
-
         //Init ustanciles lists, push only if not includes in arrayOfUstensils
         r.ustensils.map((ustensil) => { 
             if(!arrayOfUstensils.includes(ustensil)) arrayOfUstensils.push(ustensil); 
+        });    
+        //Init list of ingredients, push only if not present in arrayOfIngredients
+        r.ingredients.forEach(i => {
+            if(arrayOfIngredients.indexOf(i.ingredient) === -1){
+                arrayOfIngredients.push(i.ingredient);
+            }
         });
+    });
+    setTags();
+}
 
-        //Add recipes list
+const setTags = () => {
+    let ingredientsTagList = $('#dropdownIngredientList');
+    let appliancesTagList = $('#dropdownAppareilList');
+    let ustensilsTagList = $('#dropdownUstensilList');
+
+    //Add list of ingrédient
+    arrayOfIngredients.forEach((ingredient, index) => {
+        ingredientsTagList.append(`
+            <li><a href="#" id="ingredient-${index}">${ingredient}</a></li>
+        `)
+    });
+    //Add list of appliance (appareil)
+    arrayOfAppliance.forEach((appliance, index) => {
+        appliancesTagList.append(`
+            <li><a href="#" id="appliance-${index}">${appliance}</a></li>
+        `)
+    });
+    //Add list of ustanciles
+    arrayOfUstensils.forEach((ustensil, index) => {
+        ustensilsTagList.append(`
+            <li><a href="#" id="ustensil-${index}">${ustensil}</a></li>
+        `)
+    });
+}
+
+//Add HTML Recipes
+const appendRecipesHTML = (recipes) => {
+    let recipesList = $("#recipes");
+    recipes.forEach((r, index) => {
         recipesList.append(`
-            <div class="col-md-4 recipe">
+            <div class="col-md-4 recipe recipeId-${index}">
                 <div class="card mb-4 box-shadow no-border">
                     <img class="card-img-top" src="/assets/img/bg-recipe.png" alt="Card image cap" />
                     <div class="card-body card-body-style">
@@ -51,39 +89,12 @@ const appendAndMapRecipes = (recipes) => {
                 </div>
             </div>
         `);
-
         //Init list of ingredients, push only if not present in arrayOfIngredients
+        //Add ingredient HTML associate to recipe ID
         r.ingredients.forEach(i => {
-            if(arrayOfIngredients.indexOf(i.ingredient) === -1){
-                arrayOfIngredients.push(i.ingredient);
-            }
-
-            //Add ingredient associate to recipe ID
             let cardIngredients = $(`#id-card-ingredients-${r.id}`);
-            cardIngredients.append(`
-                <li>${i.ingredient}: <span>${i.quantity ? i.quantity : ''} ${i.unit ? i.unit : ''}</span></li>
-            `);
+            cardIngredients.append(`<li>${i.ingredient}: <span>${i.quantity ? i.quantity : ''} ${i.unit ? i.unit : ''}</span></li>`);
         });
-    });
-
-
-    //Add list of ingrédient
-    arrayOfIngredients.forEach((ingredient, index) => {
-        ingredientsList.append(`
-            <li><a href="#" id="ingredient-${index}">${ingredient}</a></li>
-        `)
-    });
-    //Add list of appliance (appareil)
-    arrayOfAppliance.forEach((appliance, index) => {
-        appliancesList.append(`
-            <li><a href="#" id="appliance-${index}">${appliance}</a></li>
-        `)
-    });
-    //Add list of ustanciles
-    arrayOfUstensils.forEach((ustensil, index) => {
-        ustensilsList.append(`
-            <li><a href="#" id="ustensil-${index}">${ustensil}</a></li>
-        `)
     });
 }
 
@@ -92,7 +103,6 @@ const toggleDropdownList = (dropdownList) => {
     if($(`#${dropdownList}`)[0].style.display == 'block') toggleIconDropdown(true);
     else toggleIconDropdown(false);
 }
-
 
 // Toggle icon of input
 const toggleIconDropdown = (showList) => {
@@ -166,22 +176,24 @@ const filterAllByText = () => {
     }
 }
 
-
-//Add tag
-let arrayOfTag = [];
+//Add tag and filter
+let arrayOfTagId = [];
+let arrayOfTagValue = [];
 $(".dropDownList").on("click", "li", function(event){
     let tagList = $("#tags");
     let colorBtn;
     let delegateTarget = event.delegateTarget.id;
 
-    if(arrayOfTag.indexOf(event.target.text) === -1){
-        arrayOfTag.push(toKebabCase(event.target.text));
+    if(!arrayOfTagId.includes(event.target.id)){
+        arrayOfTagId.push(event.target.id); //For delete tag
+        arrayOfTagValue.push(event.target.text); //For filter list of recipes
+
         if(delegateTarget == 'dropdownIngredientList') colorBtn = 'btnBlue';
         if(delegateTarget == 'dropdownAppareilList') colorBtn = 'btnGreen';
         if(delegateTarget == 'dropdownUstensilList') colorBtn = 'btnOrange';
         tagList.append(`
             <button type="button" class="btn btn-info btnDefault ${colorBtn} ${event.target.id}" 
-                onclick="deleteTag('${toKebabCase(event.target.text)}', '${event.target.id}')">
+                onclick="deleteTagById('${event.target.id}')">
                 ${event.target.text} 
                 <img src="./assets/img/remove-icon.png" class="icon removeIcon" alt="Remove icon"/>
             </button>
@@ -189,17 +201,48 @@ $(".dropDownList").on("click", "li", function(event){
     }
 
     //Filter list of recipes by tag
+    let arrayOfRecipesFiltered = arrayOfRecipes.filter(currentElement => {
+        return arrayOfTagValue.includes(currentElement.appliance || currentElement.name);
+    });
 
+    arrayOfRecipesFiltered = arrayOfRecipes.filter(currentElement => {
+        
+    })
 
+    filterRecipesByTag(arrayOfRecipesFiltered);
+
+/*     let data = recipes.map((r) => {
+        return r.ingredients.filter((i) => {
+            if(tags.indexOf(i.ingredient) > -1){
+                return r.id;
+            }
+            console.log('id', r.id);
+            console.log('test', tags.indexOf(i.ingredient) > -1);
+            console.log('i', i.ingredient);
+        });
+    }); */
 });
 
+
+const filterRecipesByTag = (recipes) => {
+    if(recipes){
+        $('.recipe').hide();
+        recipes.forEach(r => {
+            $(`.recipeId-${r.id}`).show();
+        });
+    } else {
+        $('.recipe').show();
+    }
+}
+
 //Remove tag
-const deleteTag = (el, elemId) => {
-    console.log(el);
-    for( var i = 0; i < arrayOfTag.length; i++){ 
-        if ( arrayOfTag[i] === el) { 
+const deleteTagById = (elemId) => {
+    for( var i = 0; i < arrayOfTagId.length; i++){ 
+        if ( arrayOfTagId[i] === elemId) { 
             $(`.${elemId}`).remove();
-            arrayOfTag.splice(i, 1);
+            delete arrayOfTagValue[i];
+            delete arrayOfTagId[i];
+            filterRecipesByTag();
         }
     }
 }

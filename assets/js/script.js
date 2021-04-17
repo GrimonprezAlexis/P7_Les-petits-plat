@@ -7,7 +7,6 @@ fetch('/data/recipes.json')
     setArrayOfRecipes(data);
     setArray(data);
     appendRecipesHTML(data);
-    setLengthOfRecipes(data);
 })
 .catch(err => {
     console.log(err);
@@ -200,43 +199,50 @@ $(".dropDownList").on("click", "li", function(event){
         `);
     }
 
+
+    filterRecipesByTags(arrayOfTagValue);
+
     //Filter list of recipes by appliance
     let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return arrayOfTagValue.includes(currentElement.appliance || currentElement.name);
     });
 
     //Filter list of recipes by ingredients
-    let recipesByIngredients = arrayOfRecipes.filter((r) => {
-        return r.ingredients.map((i) => {
-            if(arrayOfTagValue.indexOf(i.ingredient) > -1){
-                return r.id;
-            }
-        });
-    });
+    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => arrayOfTagValue.indexOf(i.ingredient) >= 0).length > 0)
 
     //Filter list of recipes by ustensils
-    let recipesByUstensils = arrayOfRecipes.filter((r) => {
-        return r.ustensils.includes(arrayOfTagValue);
+    let recipesByUstensils = arrayOfRecipes.filter(r => {
+        return r.ustensils.some(u => arrayOfTagValue.indexOf(u) >= 0)
     });
 
     let arrayOfRecipesFiltered = [];
-    arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils);
-    filterRecipesByTag(arrayOfRecipesFiltered);
-
-/*     let data = recipes.map((r) => {
-        return r.ingredients.filter((i) => {
-            if(tags.indexOf(i.ingredient) > -1){
-                return r.id;
-            }
-            console.log('id', r.id);
-            console.log('test', tags.indexOf(i.ingredient) > -1);
-            console.log('i', i.ingredient);
-        });
-    }); */
+    arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+    showHideRecipesByTag(arrayOfRecipesFiltered);
 });
 
+//Filter recipes by tags
+const filterRecipesByTags = (tags) => {
+    //Filter list of recipes by appliance
+    let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+        return tags.includes(currentElement.appliance || currentElement.name);
+    });
 
-const filterRecipesByTag = (recipes) => {
+    //Filter list of recipes by ingredients
+    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0)
+
+    //Filter list of recipes by ustensils
+    let recipesByUstensils = arrayOfRecipes.filter(r => {
+        return r.ustensils.some(u => tags.indexOf(u) >= 0)
+    });
+
+    let arrayOfRecipesFiltered = [];
+    arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+    showHideRecipesByTag(arrayOfRecipesFiltered);
+}
+
+
+//Show and Hide recipes rather than tags
+const showHideRecipesByTag = (recipes) => {
     if(recipes){
         $('.recipe').hide();
         recipes.forEach(r => {
@@ -254,7 +260,7 @@ const deleteTagById = (elemId) => {
             $(`.${elemId}`).remove();
             delete arrayOfTagValue[i];
             delete arrayOfTagId[i];
-            filterRecipesByTag();
+            filterRecipesByTags(arrayOfTagValue);
         }
     }
 }

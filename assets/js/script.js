@@ -97,6 +97,7 @@ const appendRecipesHTML = (recipes) => {
     });
 }
 
+//Show / Hide dropdown list
 const toggleDropdownList = (dropdownList) => {
     $(`#${dropdownList}`).toggle(); 
     if($(`#${dropdownList}`)[0].style.display == 'block') toggleIconDropdown(true);
@@ -118,7 +119,8 @@ const toggleIconDropdown = (showList) => {
     }
 }
 
-const filterFunction = (inputElem, dropdownList) => {
+// Show / Hide tag on dropdown list
+const filterByDropdownText = (inputElem, dropdownList) => {
     let input, filter, ul, li, a, i, txtValue;
     let foundValue = [];
 
@@ -199,29 +201,12 @@ $(".dropDownList").on("click", "li", function(event){
         `);
     }
 
-
     filterRecipesByTags(arrayOfTagValue);
-
-    //Filter list of recipes by appliance
-    let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-        return arrayOfTagValue.includes(currentElement.appliance || currentElement.name);
-    });
-
-    //Filter list of recipes by ingredients
-    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => arrayOfTagValue.indexOf(i.ingredient) >= 0).length > 0)
-
-    //Filter list of recipes by ustensils
-    let recipesByUstensils = arrayOfRecipes.filter(r => {
-        return r.ustensils.some(u => arrayOfTagValue.indexOf(u) >= 0)
-    });
-
-    let arrayOfRecipesFiltered = [];
-    arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-    showHideRecipesByTag(arrayOfRecipesFiltered);
 });
 
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
+    
     //Filter list of recipes by appliance
     let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return tags.includes(currentElement.appliance || currentElement.name);

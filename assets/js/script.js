@@ -12,7 +12,6 @@ fetch('/data/recipes.json')
     console.log(err);
 });
 
-
 let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
@@ -22,6 +21,7 @@ const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
 }
 
+//Init the array of appareil, ustensils, ingredients
 const setArray = (recipes) => {
     recipes.forEach((r , index) => {
         //Init appareil list, push only if not present in arrayOfAppliance
@@ -42,6 +42,7 @@ const setArray = (recipes) => {
     setTags();
 }
 
+//Init tags in dropdown list HTML
 const setTags = () => {
     let ingredientsTagList = $('#dropdownIngredientList');
     let appliancesTagList = $('#dropdownAppareilList');
@@ -206,7 +207,7 @@ $(".dropDownList").on("click", "li", function(event){
 
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
-    
+
     //Filter list of recipes by appliance
     let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return tags.includes(currentElement.appliance || currentElement.name);
@@ -256,4 +257,4 @@ const toKebabCase = str =>
   str
     .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
     .map(x => x.toLowerCase())
-    .join('-');
+.join('-');

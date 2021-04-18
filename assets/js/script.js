@@ -1,5 +1,5 @@
 //Fetch data from json file
-fetch('../../data/recipes.json')
+fetch('/data/recipes.json')
 .then(response => {
     return response.json();
 })

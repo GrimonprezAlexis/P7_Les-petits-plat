@@ -1,5 +1,5 @@
 //Fetch data from json file
-fetch('/data/recipes.json')
+fetch('../../data/recipes.json')
 .then(response => {
     return response.json();
 })
@@ -19,7 +19,7 @@ let arrayOfUstensils = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
-}
+};
 
 //Init the array of appareil, ustensils, ingredients
 const setArray = (recipes) => {
@@ -40,7 +40,7 @@ const setArray = (recipes) => {
         });
     });
     setTags();
-}
+};
 
 //Init tags in dropdown list HTML
 const setTags = () => {
@@ -48,25 +48,28 @@ const setTags = () => {
     let appliancesTagList = $('#dropdownAppareilList');
     let ustensilsTagList = $('#dropdownUstensilList');
 
+
+    console.log(arrayOfIngredients);
+
     //Add list of ingrédient
     arrayOfIngredients.forEach((ingredient, index) => {
         ingredientsTagList.append(`
             <li><a href="#" id="ingredient-${index}">${ingredient}</a></li>
-        `)
+        `);
     });
     //Add list of appliance (appareil)
     arrayOfAppliance.forEach((appliance, index) => {
         appliancesTagList.append(`
             <li><a href="#" id="appliance-${index}">${appliance}</a></li>
-        `)
+        `);
     });
     //Add list of ustanciles
     arrayOfUstensils.forEach((ustensil, index) => {
         ustensilsTagList.append(`
             <li><a href="#" id="ustensil-${index}">${ustensil}</a></li>
-        `)
+        `);
     });
-}
+};
 
 //Add HTML Recipes
 const appendRecipesHTML = (recipes) => {
@@ -96,14 +99,14 @@ const appendRecipesHTML = (recipes) => {
             cardIngredients.append(`<li>${i.ingredient}: <span>${i.quantity ? i.quantity : ''} ${i.unit ? i.unit : ''}</span></li>`);
         });
     });
-}
+};
 
 //Show / Hide dropdown list
 const toggleDropdownList = (dropdownList) => {
     $(`#${dropdownList}`).toggle(); 
     if($(`#${dropdownList}`)[0].style.display == 'block') toggleIconDropdown(true);
     else toggleIconDropdown(false);
-}
+};
 
 // Toggle icon of input
 const toggleIconDropdown = (showList) => {
@@ -118,7 +121,7 @@ const toggleIconDropdown = (showList) => {
         $("#icon-dropdown-down").css("display", "inherit");
         $("#icon-dropdown-up").css("display", "none");        
     }
-}
+};
 
 // Show / Hide tag on dropdown list
 const filterByDropdownText = (inputElem, dropdownList) => {
@@ -162,7 +165,7 @@ const filterByDropdownText = (inputElem, dropdownList) => {
         $(`#${dropdownList}`).css("display", "none");
         toggleIconDropdown(false);
     }
-}
+};
 
 //Show list by text field
 const filterAllByText = () => {
@@ -176,7 +179,7 @@ const filterAllByText = () => {
     } else {
         $('.recipe').show();
     }
-}
+};
 
 //Add tag and filter
 let arrayOfTagId = [];
@@ -214,17 +217,17 @@ const filterRecipesByTags = (tags) => {
     });
 
     //Filter list of recipes by ingredients
-    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0)
+    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0);
 
     //Filter list of recipes by ustensils
     let recipesByUstensils = arrayOfRecipes.filter(r => {
-        return r.ustensils.some(u => tags.indexOf(u) >= 0)
+        return r.ustensils.some(u => tags.indexOf(u) >= 0);
     });
 
     let arrayOfRecipesFiltered = [];
     arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
     showHideRecipesByTag(arrayOfRecipesFiltered);
-}
+};
 
 
 //Show and Hide recipes rather than tags
@@ -249,7 +252,7 @@ const deleteTagById = (elemId) => {
             filterRecipesByTags(arrayOfTagValue);
         }
     }
-}
+};
 
 //Transform to Kebab case (some-text)
 const toKebabCase = str =>

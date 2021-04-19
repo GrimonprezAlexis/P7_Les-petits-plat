@@ -16,7 +16,7 @@ let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
-let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
+let recipesByAppliance, recipesByIngredients, recipesByUstensils, searchValue = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
@@ -165,18 +165,18 @@ const filterByDropdownText = (inputElem, dropdownList) => {
     }
 };
 
-const searchEngine = () => {
+const searchEngine = (searchValue) => {
     //Search recipe by appliance or name
     recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-        return currentElement.appliance.toLowerCase().includes(searchValue.toLowerCase()) || currentElement.name.toLowerCase().includes(searchValue.toLowerCase())
+        return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
     });
-
+    
     //Search recipe by ingredients
-    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue.toLowerCase())).length > 0);
+    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
 
     //Search recipe by ustensils
     recipesByUstensils = arrayOfRecipes.filter(r => {
-        return r.ustensils.some(u => u.toLowerCase().includes(searchValue.toLowerCase()));
+        return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
     });
 
     let arrayOfRecipesFiltered = [];
@@ -185,16 +185,16 @@ const searchEngine = () => {
         $('#recipes-not-found').css('display', 'block');
         $('.recipe').hide();
     } else {
-        showHideRecipesFiltered(arrayOfRecipesFiltered)
+        showHideRecipesFiltered(arrayOfRecipesFiltered);
     }
-}
+};
 
 //Show list by text field
 //Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
-    searchValue.push(document.getElementById("inputSearchAll").value.toLowerCase());
-    if(searchValue.length >= 3){
-        searchEngine();
+    if(document.getElementById("inputSearchAll").value >= 3){
+        searchValue.push(document.getElementById("inputSearchAll").value.toLowerCase());
+        searchEngine(searchValue);
     } else {
         searchValue = [];
         $('.recipe').show();
@@ -244,7 +244,7 @@ const showHideRecipesFiltered = (recipes) => {
     } else {
         $('.recipe').show();
     }
-}
+};
 
 //Remove tag
 const deleteTagById = (elemId) => {

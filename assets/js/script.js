@@ -16,7 +16,7 @@ let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
-let recipesByAppliance, recipesByIngredients, recipesByUstensils, searchValue = [];
+let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
@@ -165,12 +165,12 @@ const filterByDropdownText = (inputElem, dropdownList) => {
     }
 };
 
-const searchEngine = (searchValue) => {
+const engineSearch = (searchValue, searchByText) => {
     //Search recipe by appliance or name
     recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
     });
-    
+
     //Search recipe by ingredients
     recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
 
@@ -187,19 +187,9 @@ const searchEngine = (searchValue) => {
     } else {
         showHideRecipesFiltered(arrayOfRecipesFiltered);
     }
-};
 
-//Show list by text field
-//Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
-const filterAllByText = () => {
-    if(document.getElementById("inputSearchAll").value >= 3){
-        searchValue.push(document.getElementById("inputSearchAll").value.toLowerCase());
-        searchEngine(searchValue);
-    } else {
-        searchValue = [];
-        $('.recipe').show();
-    }
-};
+
+}
 
 //Add tag and filter
 let arrayOfTagId = [];
@@ -228,9 +218,17 @@ $(".dropDownList").on("click", "li", function(event){
     filterRecipesByTags(arrayOfTagValue);
 });
 
+
+//Show list by text field
+//Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
+const filterAllByText = () => {
+    let searchValue = document.getElementById("inputSearchAll").value;
+    searchValue.length >= 3 ? engineSearch(searchValue.toLowerCase(), true) :  $('.recipe').show();
+};
+
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
-    searchEngine();
+    engineSearch(searchValue.toLowerCase(), false);
 };
 
 

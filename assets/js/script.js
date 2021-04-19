@@ -18,13 +18,11 @@ let arrayOfAppliance = [];
 let arrayOfUstensils = [];
 let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
 
-const setArrayOfRecipes = (recipes) => {
-    arrayOfRecipes = recipes;
-};
+const setArrayOfRecipes = (recipes) => arrayOfRecipes = recipes;
 
 //Init the array of appareil, ustensils, ingredients
 const setArray = (recipes) => {
-    recipes.forEach((r , index) => {
+    recipes.forEach(r => {
         //Init appareil list, push only if not present in arrayOfAppliance
         if(arrayOfAppliance.indexOf(r.appliance) === -1){
             arrayOfAppliance.push(r.appliance);
@@ -51,21 +49,15 @@ const setTags = () => {
 
     //Add list of ingrédient
     arrayOfIngredients.forEach((ingredient, index) => {
-        ingredientsTagList.append(`
-            <li><a href="#" id="ingredient-${index}">${ingredient}</a></li>
-        `);
+        ingredientsTagList.append(`<li><a href="#" id="ingredient-${index}">${ingredient}</a></li>`);
     });
     //Add list of appliance (appareil)
     arrayOfAppliance.forEach((appliance, index) => {
-        appliancesTagList.append(`
-            <li><a href="#" id="appliance-${index}">${appliance}</a></li>
-        `);
+        appliancesTagList.append(`<li><a href="#" id="appliance-${index}">${appliance}</a></li>`);
     });
     //Add list of ustanciles
     arrayOfUstensils.forEach((ustensil, index) => {
-        ustensilsTagList.append(`
-            <li><a href="#" id="ustensil-${index}">${ustensil}</a></li>
-        `);
+        ustensilsTagList.append(`<li><a href="#" id="ustensil-${index}">${ustensil}</a></li>`);
     });
 };
 
@@ -109,7 +101,6 @@ const toggleDropdownList = (dropdownList) => {
 // Toggle icon of input
 const toggleIconDropdown = (showList) => {
     let boolShowList = showList;
-
     // Icon is up if value is found
     if(boolShowList){
         $("#icon-dropdown-down").css("display", "none");
@@ -170,15 +161,12 @@ const engineSearch = (searchValue, searchByText) => {
     recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
     });
-
     //Search recipe by ingredients
     recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
-
     //Search recipe by ustensils
     recipesByUstensils = arrayOfRecipes.filter(r => {
         return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
     });
-
     let arrayOfRecipesFiltered = [];
     arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
     if(arrayOfRecipesFiltered.size == 0) {
@@ -187,9 +175,7 @@ const engineSearch = (searchValue, searchByText) => {
     } else {
         showHideRecipesFiltered(arrayOfRecipesFiltered);
     }
-
-
-}
+};
 
 //Add tag and filter
 let arrayOfTagId = [];
@@ -214,23 +200,20 @@ $(".dropDownList").on("click", "li", function(event){
             </button>
         `);
     }
-
     filterRecipesByTags(arrayOfTagValue);
 });
-
 
 //Show list by text field
 //Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
-    let searchValue = document.getElementById("inputSearchAll").value;
-    searchValue.length >= 3 ? engineSearch(searchValue.toLowerCase(), true) :  $('.recipe').show();
+    if(document.getElementById("inputSearchAll").value.length >= 3) engineSearch(searchValue.toLowerCase(), true);
+    else $('.recipe').show();
 };
 
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
     engineSearch(searchValue.toLowerCase(), false);
 };
-
 
 //Show and Hide recipes rather than tags
 const showHideRecipesFiltered = (recipes) => {

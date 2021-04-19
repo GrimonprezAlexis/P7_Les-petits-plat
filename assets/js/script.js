@@ -16,7 +16,7 @@ let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
-let recipesByAppliance, recipesByIngredients, recipesByUstensils, arrayOfRecipesFiltered = [];
+let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
@@ -165,35 +165,38 @@ const filterByDropdownText = (inputElem, dropdownList) => {
     }
 };
 
+const searchEngine = () => {
+    //Search recipe by appliance or name
+    recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+        return currentElement.appliance.toLowerCase().includes(searchValue.toLowerCase()) || currentElement.name.toLowerCase().includes(searchValue.toLowerCase())
+    });
+
+    //Search recipe by ingredients
+    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue.toLowerCase())).length > 0);
+
+    //Search recipe by ustensils
+    recipesByUstensils = arrayOfRecipes.filter(r => {
+        return r.ustensils.some(u => u.toLowerCase().includes(searchValue.toLowerCase()));
+    });
+
+    let arrayOfRecipesFiltered = [];
+    arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+    if(arrayOfRecipesFiltered.size == 0) {
+        $('#recipes-not-found').css('display', 'block');
+        $('.recipe').hide();
+    } else {
+        showHideRecipesFiltered(arrayOfRecipesFiltered)
+    }
+}
+
 //Show list by text field
 //Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
-    let searchValue = document.getElementById("inputSearchAll").value.toLowerCase();
+    searchValue.push(document.getElementById("inputSearchAll").value.toLowerCase());
     if(searchValue.length >= 3){
-
-        //Search recipe by appliance or name
-        recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-            return currentElement.appliance.toLowerCase().includes(searchValue.toLowerCase()) || currentElement.name.toLowerCase().includes(searchValue.toLowerCase())
-        });
-
-        //Search recipe by ingredients
-        recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue.toLowerCase())).length > 0);
-
-        //Search recipe by ustensils
-        recipesByUstensils = arrayOfRecipes.filter(r => {
-            return r.ustensils.some(u => u.toLowerCase().includes(searchValue.toLowerCase()));
-        });
-
-        let arrayOfRecipesFiltered = [];
-        arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-        if(arrayOfRecipesFiltered.size == 0) {
-            $('#recipes-not-found').css('display', 'block');
-            $('.recipe').show();
-        } else {
-            showHideRecipesFiltered(arrayOfRecipesFiltered)
-        }
-    
+        searchEngine();
     } else {
+        searchValue = [];
         $('.recipe').show();
     }
 };
@@ -227,22 +230,7 @@ $(".dropDownList").on("click", "li", function(event){
 
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
-
-    //Filter list of recipes by appliance
-    recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-        return tags.includes(currentElement.appliance || currentElement.name);
-    });
-
-    //Filter list of recipes by ingredients
-    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0);
-
-    //Filter list of recipes by ustensils
-    recipesByUstensils = arrayOfRecipes.filter(r => {
-        return r.ustensils.some(u => tags.indexOf(u) >= 0);
-    });
-
-    arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-    showHideRecipesFiltered(arrayOfRecipesFiltered);
+    searchEngine();
 };
 
 

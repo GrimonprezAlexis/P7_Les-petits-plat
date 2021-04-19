@@ -16,7 +16,7 @@ let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
-let recipesByAppliance, recipesByIngredients, recipesByUstensils, arrayOfRecipesFiltered = [];
+let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
@@ -186,7 +186,12 @@ const filterAllByText = () => {
 
         let arrayOfRecipesFiltered = [];
         arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-        arrayOfRecipesFiltered.size == 0 ? $('#recipes-not-found').css('display', 'block') : showHideRecipesFiltered(arrayOfRecipesFiltered);
+        if(arrayOfRecipesFiltered.size == 0) {
+            $('#recipes-not-found').css('display', 'block');
+            $('.recipe').hide();
+        } else {
+            showHideRecipesFiltered(arrayOfRecipesFiltered)
+        }
     } else {
         searchValue = [];
         $('.recipe').show();
@@ -236,8 +241,14 @@ const filterRecipesByTags = (tags) => {
         return r.ustensils.some(u => tags.indexOf(u) >= 0);
     });
 
+    let arrayOfRecipesFiltered = [];
     arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-    showHideRecipesFiltered(arrayOfRecipesFiltered);
+    if(arrayOfRecipesFiltered.size == 0) {
+        $('#recipes-not-found').css('display', 'block');
+        $('.recipe').hide();
+    } else {
+        showHideRecipesFiltered(arrayOfRecipesFiltered)
+    }
 };
 
 

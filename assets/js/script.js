@@ -16,6 +16,7 @@ let arrayOfRecipes = [];
 let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
+let recipesByAppliance, recipesByIngredients, recipesByUstensils, arrayOfRecipesFiltered = [];
 
 const setArrayOfRecipes = (recipes) => {
     arrayOfRecipes = recipes;
@@ -48,9 +49,6 @@ const setTags = () => {
     let appliancesTagList = $('#dropdownAppareilList');
     let ustensilsTagList = $('#dropdownUstensilList');
 
-
-    console.log(arrayOfIngredients);
-
     //Add list of ingrédient
     arrayOfIngredients.forEach((ingredient, index) => {
         ingredientsTagList.append(`
@@ -73,7 +71,7 @@ const setTags = () => {
 
 //Add HTML Recipes
 const appendRecipesHTML = (recipes) => {
-    let recipesList = $("#recipes");
+    let recipesList = $('#recipes');    
     recipes.forEach((r, index) => {
         recipesList.append(`
             <div class="col-md-4 recipe recipeId-${index}">
@@ -129,13 +127,14 @@ const filterByDropdownText = (inputElem, dropdownList) => {
     let foundValue = [];
 
     //"dropdownInputPrimary"
-    input = document.getElementById(inputElem);
+    input = $(`#${inputElem}`);
     filter = input.value.toUpperCase();
 
     if(input.value.length >= 3){
-        $(`#${dropdownList}`).css("display", "flex");
-        ul = document.getElementById(dropdownList);
+        $(`#${dropdownList}`).style.display = "flex";
+        ul = $(`#${dropdownList}`);
         li = ul.getElementsByTagName("li");
+
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("a")[0];
             txtValue = a.textContent || a.innerText;
@@ -156,26 +155,39 @@ const filterByDropdownText = (inputElem, dropdownList) => {
         }
     } else {
         //Reset all dropdownList
-        ul = document.getElementById(dropdownList);
+        ul = $(`#${dropdownList}`);
         li = ul.getElementsByTagName("li");
         for (i = 0; i < li.length; i++) {
             li[i].style.display = 'inherit';
         }
-
         $(`#${dropdownList}`).css("display", "none");
         toggleIconDropdown(false);
     }
 };
 
 //Show list by text field
+//Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
-    let searchValue = $('#inputSearchAll').val();
+    let searchValue = document.getElementById("inputSearchAll").value.toLowerCase();
     if(searchValue.length >= 3){
-        $('.recipe').hide();
-        $('.recipe:contains("'+searchValue+'")').show();
-        if(!$('.recipe').is(":visible")){
-            $('#recipes-not-found').css('display', 'block');
-        }
+
+        //Search recipe by appliance or name
+        recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+            return currentElement.appliance.toLowerCase().includes(searchValue.toLowerCase()) || currentElement.name.toLowerCase().includes(searchValue.toLowerCase())
+        });
+
+        //Search recipe by ingredients
+        recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue.toLowerCase())).length > 0);
+
+        //Search recipe by ustensils
+        recipesByUstensils = arrayOfRecipes.filter(r => {
+            return r.ustensils.some(u => u.toLowerCase().includes(searchValue.toLowerCase()));
+        });
+
+        let arrayOfRecipesFiltered = [];
+        arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+        arrayOfRecipesFiltered.size == 0 ? $('#recipes-not-found').css('display', 'block') : showHideRecipesFiltered(arrayOfRecipesFiltered);
+    
     } else {
         $('.recipe').show();
     }
@@ -212,26 +224,25 @@ $(".dropDownList").on("click", "li", function(event){
 const filterRecipesByTags = (tags) => {
 
     //Filter list of recipes by appliance
-    let recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+    recipesByAppliance = arrayOfRecipes.filter(currentElement => {
         return tags.includes(currentElement.appliance || currentElement.name);
     });
 
     //Filter list of recipes by ingredients
-    let recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0);
+    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => tags.indexOf(i.ingredient) >= 0).length > 0);
 
     //Filter list of recipes by ustensils
-    let recipesByUstensils = arrayOfRecipes.filter(r => {
+    recipesByUstensils = arrayOfRecipes.filter(r => {
         return r.ustensils.some(u => tags.indexOf(u) >= 0);
     });
 
-    let arrayOfRecipesFiltered = [];
     arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-    showHideRecipesByTag(arrayOfRecipesFiltered);
+    showHideRecipesFiltered(arrayOfRecipesFiltered);
 };
 
 
 //Show and Hide recipes rather than tags
-const showHideRecipesByTag = (recipes) => {
+const showHideRecipesFiltered = (recipes) => {
     if(recipes){
         $('.recipe').hide();
         recipes.forEach(r => {

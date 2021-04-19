@@ -187,8 +187,8 @@ const filterAllByText = () => {
         let arrayOfRecipesFiltered = [];
         arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
         arrayOfRecipesFiltered.size == 0 ? $('#recipes-not-found').css('display', 'block') : showHideRecipesFiltered(arrayOfRecipesFiltered);
-    
     } else {
+        searchValue = [];
         $('.recipe').show();
     }
 };

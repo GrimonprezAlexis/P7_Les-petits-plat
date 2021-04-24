@@ -1841,12 +1841,12 @@ const filterByDropdownText = (inputElem, dropdownList) => {
     let foundValue = [];
 
     //"dropdownInputPrimary"
-    input = $(`#${inputElem}`);
+    input = document.getElementById(inputElem);
     filter = input.value.toUpperCase();
 
     if(input.value.length >= 3){
-        $(`#${dropdownList}`).style.display = "flex";
-        ul = $(`#${dropdownList}`);
+        $(`#${dropdownList}`).css("display", "flex");
+        ul = document.getElementById(dropdownList);
         li = ul.getElementsByTagName("li");
 
         for (i = 0; i < li.length; i++) {
@@ -1869,7 +1869,7 @@ const filterByDropdownText = (inputElem, dropdownList) => {
         }
     } else {
         //Reset all dropdownList
-        ul = $(`#${dropdownList}`);
+        ul = document.getElementById(dropdownList);
         li = ul.getElementsByTagName("li");
         for (i = 0; i < li.length; i++) {
             li[i].style.display = 'inherit';
@@ -1994,8 +1994,8 @@ const deleteTagById = (elemId) => {
     for( var i = 0; i < arrayOfTagId.length; i++){ 
         if ( arrayOfTagId[i] === elemId) { 
             $(`.${elemId}`).remove();
-            delete arrayOfTagValue[i];
-            delete arrayOfTagId[i];
+            arrayOfTagValue.splice(i, 1);
+            arrayOfTagId.splice(i, 1);
             filterRecipesByTags(arrayOfTagValue);
         }
     }

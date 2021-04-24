@@ -1880,18 +1880,47 @@ const filterByDropdownText = (inputElem, dropdownList) => {
 };
 
 const engineSearch = (searchValue, searchByText) => {
-    //Search recipe by appliance or name
-    recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-        return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
-    });
+    if(searchByText){
+        //Search recipe by appliance or name
+        //Version 1 : https://stackoverflow.com/questions/4556099/in-javascript-how-do-you-search-an-array-for-a-substring-match
+            /*         
+            recipesByAppliance = arrayOfRecipes.filter(function(currentElement){
+            if(currentElement) {
+                return (currentElement.appliance.toLowerCase().substring(0, searchValue.length) === searchValue || 
+                currentElement.name.toLowerCase().substring(0, searchValue.length) === searchValue);
+            }
+        }); */
 
-    //Search recipe by ingredients
-    recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
+        //Version 2
+        recipesByAppliance = arrayOfRecipes.filter(function(currentElement){
+            if(currentElement) {
+                return currentElement.appliance.toLowerCase().indexOf(searchValue) >= 0 || currentElement.name.toLowerCase().indexOf(searchValue) >= 0;
+            }
+        });
 
-    //Search recipe by ustensils
-    recipesByUstensils = arrayOfRecipes.filter(r => {
-        return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
-    });
+        //Search recipe by ingredients
+        recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().indexOf(searchValue) >= 0).length > 0);
+
+        //Search recipe by ustensils
+        recipesByUstensils = arrayOfRecipes.filter(r => {
+            return r.ustensils.some(u => u.toLowerCase().indexOf(searchValue) >= 0);
+        });
+
+    } else {
+        //Search recipe by appliance or name
+        recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+            return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
+        });
+    
+        //Search recipe by ingredients
+        recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
+    
+        //Search recipe by ustensils
+        recipesByUstensils = arrayOfRecipes.filter(r => {
+            return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
+        });
+    }
+
 
     let arrayOfRecipesFiltered = [];
     arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));

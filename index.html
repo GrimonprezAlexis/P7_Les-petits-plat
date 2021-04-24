@@ -41,12 +41,12 @@
             <div class="mt-3"></div>
 
             <!-- List of tag -->
-            <section class="container" id="tags"></section>
+            <div class="container" id="tags"></div>
 
             <div class="mt-3"></div>
 
             <!-- Dropdown -->
-            <section class="container">
+            <div class="container">
                     <div class="row">
                         <!-- Dropdown ingrédient -->
                         <div class="col-md-3 contents">
@@ -54,11 +54,11 @@
                                 <div class="input-group w-200 p-05 pb-0 ">
                                     <input type="text" class="form-control inputDropdownIngredient" placeholder="Ingrédient"
                                     id="dropdownInputIngredient" onkeyup="filterByDropdownText('dropdownInputIngredient', 'dropdownIngredientList')"
-                                    aria-label="Ingrédient listes" aria-describedby="basic-addon2">
+                                    aria-label="Ingrédient listes">
                                     <div class="input-group-btn" onclick="toggleDropdownList('dropdownIngredientList')">
                                         <button class="btn btn-default btnDropdownIngredient" type="submit">
-                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
-                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon icon-dropdown-down" alt="Dropdown down icon" />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon icon-dropdown-up" alt="Dropdown up icon" />
                                         </button>
                                     </div>
                                 </div>
@@ -70,13 +70,13 @@
                         <div class="col-md-3 contents">
                             <div class="dropdown dropdownSearch">
                                 <div class="input-group w-200 p-05 pb-0">
-                                    <input type="text" class="form-control inputDropdownAppareil" placeholder="Appareil"
-                                    class="dropDownList" id="dropdownInputAppareil" onkeyup="filterByDropdownText('dropdownInputAppareil', 'dropdownAppareilList')"
-                                    aria-label="Appareil listes" aria-describedby="basic-addon2">
+                                    <input type="text" class="form-control inputDropdownAppareil dropDownList" placeholder="Appareil" 
+                                    id="dropdownInputAppareil" onkeyup="filterByDropdownText('dropdownInputAppareil', 'dropdownAppareilList')"
+                                    aria-label="Appareil listes">
                                     <div class="input-group-btn" onclick="toggleDropdownList('dropdownAppareilList')">
                                         <button class="btn btn-default btnDropdownAppareil" type="submit">
-                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
-                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon icon-dropdown-down" alt="Dropdown down icon" />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon icon-dropdown-up" alt="Dropdown up icon" />
                                         </button>
                                     </div>
                                 </div>
@@ -90,11 +90,11 @@
                                 <div class="input-group w-200 p-05 pb-0 ">
                                     <input type="text" class="form-control inputDropdownUstensil" placeholder="Ustensiles"
                                     id="dropdownInputUstensil" onkeyup="filterByDropdownText('dropdownInputUstensil', 'dropdownUstensilList')"
-                                    aria-label="Ustensiles listes" aria-describedby="basic-addon2">
+                                    aria-label="Ustensiles listes">
                                     <div class="input-group-btn" onclick="toggleDropdownList('dropdownUstensilList')">
                                         <button class="btn btn-default btnDropdownUstensil" type="submit">
-                                            <img src="./assets/img/dropdown-icon-down.png" class="icon" alt="Dropdown down icon" id="icon-dropdown-down"  />
-                                            <img src="./assets/img/dropdown-icon-up.png" class="icon" alt="Dropdown up icon" id="icon-dropdown-up" />
+                                            <img src="./assets/img/dropdown-icon-down.png" class="icon icon-dropdown-down" alt="Dropdown down icon" />
+                                            <img src="./assets/img/dropdown-icon-up.png" class="icon icon-dropdown-up" alt="Dropdown up icon" />
                                         </button>
                                     </div>
                                 </div>
@@ -103,13 +103,13 @@
                         </div>
 
                     </div>
-            </section>
+                </div>
         </header>
 
         <div class="mt-3"></div>
 
 
-        <main role="main">
+        <main>
             <div class="album py-5 bg-light">
                 <div class="container">
                     <div class="row" id="recipes"></div>
@@ -120,16 +120,6 @@
             </div>
         </main>
 
-        <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-            <a href="#">Back to top</a>
-            </p>
-            <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-        </div>
-        </footer>
-
     <!-- Bootstrap core JavaScript + Javascript
     ================================================== -->
     <script src="assets/vendor/jquery-3.2.1.slim.min.js"></script>
@@ -138,9 +128,4 @@
 
     <script src="assets/js/script.js"></script>    
   </body>
-
-
-    <body>
-
-    </body>
 </html>

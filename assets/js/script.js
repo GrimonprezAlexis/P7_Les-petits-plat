@@ -1824,12 +1824,12 @@ const toggleIconDropdown = (showList) => {
     let boolShowList = showList;
     // Icon is up if value is found
     if(boolShowList){
-        $("#icon-dropdown-down").css("display", "none");
-        $("#icon-dropdown-up").css("display", "inherit");        
+        $(".icon-dropdown-down").css("display", "none");
+        $(".icon-dropdown-up").css("display", "inherit");        
     } else {
         // Default icon is down
-        $("#icon-dropdown-down").css("display", "inherit");
-        $("#icon-dropdown-up").css("display", "none");        
+        $(".icon-dropdown-down").css("display", "inherit");
+        $(".icon-dropdown-up").css("display", "none");        
     }
 };
 

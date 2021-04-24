@@ -1787,7 +1787,7 @@ const setRecipesHTML = (recipes) => {
         recipesList.append(`
             <div class="col-md-4 recipe recipeId-${r.id}">
                 <div class="card mb-4 box-shadow no-border">
-                    <img class="card-img-top" src="./bg-recipe.pngg" alt="Card image cap" />
+                    <img class="card-img-top" src="assets/img/bg-recipe.png" alt="Card image cap" />
                     <div class="card-body card-body-style">
                         <div class="d-flex justify-content-between">
                             <label class="card-title">${r.name}</label>

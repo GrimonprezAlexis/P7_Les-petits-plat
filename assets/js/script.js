@@ -1742,6 +1742,8 @@ let arrayOfIngredients = [];
 let arrayOfAppliance = [];
 let arrayOfUstensils = [];
 let recipesByAppliance, recipesByIngredients, recipesByUstensils = [];
+let arrayOfRecipesFilteredByTag, arrayOfRecipesFilteredByText = [];
+
 
 const setArrayOfRecipes = (recipes) => arrayOfRecipes = recipes;
 
@@ -1906,35 +1908,41 @@ $(".dropDownList").on("click", "li", function(event){
 //Show list by text field
 //Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
-    let arrayOfRecipesFiltered = [];
+    
     let searchValue = document.getElementById("inputSearchAll").value.toLowerCase(); 
     if(searchValue.length >= 3) {
+        arrayOfRecipesFilteredByText = arrayOfRecipesFilteredByTag && arrayOfRecipesFilteredByTag.size > 0 ? [...arrayOfRecipesFilteredByTag] : arrayOfRecipes;
+        
         //Search recipe by appliance or name
-        recipesByAppliance = arrayOfRecipes.filter(currentElement => {
+        recipesByAppliance = arrayOfRecipesFilteredByText.filter(currentElement => {
             return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue) || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;;
         });
         //Search recipe by ingredients
-        recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
+        recipesByIngredients = arrayOfRecipesFilteredByText.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
         //Search recipe by ustensils
-        recipesByUstensils = arrayOfRecipes.filter(r => {
+        recipesByUstensils = arrayOfRecipesFilteredByText.filter(r => {
             return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
         });
 
-        arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-        if(arrayOfRecipesFiltered.size == 0) {
+        arrayOfRecipesFilteredByText = new Set([].concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+        if(arrayOfRecipesFilteredByText.size == 0) {
             $('#recipes-not-found').css('display', 'block');
             $('.recipe').hide();
         } else {
-            showHideRecipesFiltered(arrayOfRecipesFiltered);
+            showHideRecipesFiltered(arrayOfRecipesFilteredByText);
         }
-    } else $('.recipe').show();
+    } else if (searchValue.length <= 2 && arrayOfRecipesFilteredByTag && arrayOfRecipesFilteredByTag.size > 0){
+        showHideRecipesFiltered(arrayOfRecipesFilteredByTag);
+    }  else {
+        $('.recipe').show();
+    }
 };
 
 //Filter recipes by tags
 const filterRecipesByTags = (tags) => {
     if(tags.length > 0){
-        let arrayOfRecipesFiltered = [];
-    
+        arrayOfRecipesFilteredByTag = arrayOfRecipesFilteredByText && arrayOfRecipesFilteredByText.size > 0 ? [...arrayOfRecipesFilteredByText] : arrayOfRecipes;
+
         //Filter list of recipes by appliance
         recipesByAppliance = arrayOfRecipes.filter(currentElement => {
             return tags.includes(currentElement.appliance || currentElement.name);
@@ -1946,13 +1954,15 @@ const filterRecipesByTags = (tags) => {
             return r.ustensils.some(u => tags.indexOf(u) >= 0);
         });
     
-        arrayOfRecipesFiltered = new Set(arrayOfRecipesFiltered.concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
-        if(arrayOfRecipesFiltered.size == 0) {
+        arrayOfRecipesFilteredByTag = new Set([].concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+        if(arrayOfRecipesFilteredByTag.size == 0) {
             $('#recipes-not-found').css('display', 'block');
             $('.recipe').hide();
         } else {
-            showHideRecipesFiltered(arrayOfRecipesFiltered);
+            showHideRecipesFiltered(arrayOfRecipesFilteredByTag);
         }
+    } else if (arrayOfRecipesFilteredByText && arrayOfRecipesFilteredByText.size > 0){
+            showHideRecipesFiltered(arrayOfRecipesFilteredByText);
     } else {
         $('.recipe').show();
     }
@@ -1977,6 +1987,7 @@ const deleteTagById = (elemId) => {
             $(`.${elemId}`).remove();
             arrayOfTagValue.splice(i, 1);
             arrayOfTagId.splice(i, 1);
+            if(arrayOfTagValue && arrayOfTagValue.length == 0) arrayOfRecipesFilteredByTag = [];
             filterRecipesByTags(arrayOfTagValue);
         }
     }

@@ -1894,7 +1894,7 @@ const engineSearch = (searchValue, searchByText) => {
         //Version 2
         recipesByAppliance = arrayOfRecipes.filter(function(currentElement){
             if(currentElement) {
-                return currentElement.appliance.toLowerCase().indexOf(searchValue) >= 0 || currentElement.name.toLowerCase().indexOf(searchValue) >= 0;
+                return currentElement.appliance.toLowerCase().indexOf(searchValue) >= 0 || currentElement.name.toLowerCase().indexOf(searchValue) >= 0 || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;
             }
         });
 

@@ -1911,7 +1911,7 @@ const filterAllByText = () => {
     if(searchValue.length >= 3) {
         //Search recipe by appliance or name
         recipesByAppliance = arrayOfRecipes.filter(currentElement => {
-            return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue);
+            return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue) || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;;
         });
         //Search recipe by ingredients
         recipesByIngredients = arrayOfRecipes.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);

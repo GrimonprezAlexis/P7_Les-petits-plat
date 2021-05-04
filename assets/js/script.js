@@ -1915,7 +1915,7 @@ const filterAllByText = () => {
         
         //Search recipe by appliance or name
         recipesByAppliance = arrayOfRecipesFilteredByText.filter(currentElement => {
-            return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue) || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;;
+            return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue) || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;
         });
         //Search recipe by ingredients
         recipesByIngredients = arrayOfRecipesFilteredByText.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);

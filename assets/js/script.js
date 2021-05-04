@@ -1909,7 +1909,8 @@ $(".dropDownList").on("click", "li", function(event){
 //Recherche des recettes dans : le titre de la recette, la liste des ingrédients de la recette, la description de la recette
 const filterAllByText = () => {
     
-    let searchValue = document.getElementById("inputSearchAll").value.toLowerCase(); 
+    let searchValue = document.getElementById("inputSearchAll").value.toLowerCase();
+
     if(searchValue.length >= 3) {
         arrayOfRecipesFilteredByText = arrayOfRecipesFilteredByTag && arrayOfRecipesFilteredByTag.size > 0 ? [...arrayOfRecipesFilteredByTag] : arrayOfRecipes;
         
@@ -1917,14 +1918,17 @@ const filterAllByText = () => {
         recipesByAppliance = arrayOfRecipesFilteredByText.filter(currentElement => {
             return currentElement.appliance.toLowerCase().includes(searchValue) || currentElement.name.toLowerCase().includes(searchValue) || currentElement.description.toLowerCase().indexOf(searchValue) >= 0;
         });
+        
         //Search recipe by ingredients
         recipesByIngredients = arrayOfRecipesFilteredByText.filter(r => r.ingredients.filter(i => i.ingredient.toLowerCase().includes(searchValue)).length > 0);
+        
         //Search recipe by ustensils
         recipesByUstensils = arrayOfRecipesFilteredByText.filter(r => {
             return r.ustensils.some(u => u.toLowerCase().includes(searchValue));
         });
 
         arrayOfRecipesFilteredByText = new Set([].concat(recipesByAppliance, recipesByIngredients, recipesByUstensils));
+        
         if(arrayOfRecipesFilteredByText.size == 0) {
             $('#recipes-not-found').css('display', 'block');
             $('.recipe').hide();
